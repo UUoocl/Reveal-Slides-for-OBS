@@ -15,3 +15,4 @@ Download the Reveal Slides for OBS plugin from this repo.
 Replace the "notes" folder in your existing reveal.js slide deck with the "notes" folder in this repo
 
 
+![image](https://github.com/UUoocl/Reveal-Slides-for-OBS/assets/99063397/c7b9e380-331c-4843-83f3-f23178e1af07)
