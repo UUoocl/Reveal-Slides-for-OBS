@@ -110,8 +110,14 @@ Add fragment events to a Markdown file using these tags after a fragment
 
 ## Speaker View Teleprompter Layout
 When a slide with notes is loaded, the text will begin scrolling.  
-Press the tilde key to toggle between playing and pausing the teleprompter.
-![image](https://github.com/UUoocl/Reveal-Slides-for-OBS/assets/99063397/2a80d521-2388-4723-9192-45d9c0138742)
+Adjust the text size and scroll speed. 
+|Action      |Key      |
+|:-----|:-----|
+|⏪Slowdown scrolling      |F8|
+|⏸️Pause scrolling      |F9     |
+|⏩Speed up scrolling      |F10      |
+|➕Increase notes text size      | =   |
+|➖Decrease notes text size      |-     |
 
 ## How to make reveal.js slides
 Try the online visual slide editor at [slides.com][https://slides.com/]
