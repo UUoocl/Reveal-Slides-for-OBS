@@ -57,7 +57,7 @@ Add the following  script sources.
 
  ![image](https://github.com/UUoocl/Reveal-Slides-for-OBS/assets/99063397/ccb5c7d4-54b2-4299-83ce-7fe83b3e3883)
 
-2. Click the "Interact" button to navigate the slide deck
+2. Click the "Interact" button to navigate the Speaker View.  Use the keyboard key N nad P to move to the next (n) or previous (p) slide.  
 
 ![image](https://github.com/UUoocl/Reveal-Slides-for-OBS/assets/99063397/b0020e79-550d-469a-98bb-e52bbe96bd7b)
 
