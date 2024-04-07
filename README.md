@@ -113,13 +113,19 @@ When a slide with notes is loaded, the text will begin scrolling.
 Adjust the text size and scroll speed. 
 |Action      |Key      |
 |:-----|:-----|
-|next slide|n|
-|previous slide|p|
+|Next slide|n|
+|Previous slide|p|
 |⏪Slowdown scrolling      |F8|
 |⏸️Pause scrolling      |F9     |
 |⏩Speed up scrolling      |F10      |
 |➕Increase notes text size      | =   |
 |➖Decrease notes text size      |-     |
+|Default layout|1|
+|Wide layout|2|
+|Tall layout|3|
+|Notes only layout|4|
+|Teleprompter layout|5|
+|Upcoming Slide only|6|
 
 ## How to make reveal.js slides
 Try the online visual slide editor at [slides.com][https://slides.com/]
