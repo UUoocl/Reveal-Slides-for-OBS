@@ -381,31 +381,32 @@ body[data-speaker-layout="teleprompter"] #current-slide,
     <script>
       console.log(wssDetails)
       var notes,
-        notesValue,
-        currentState,
-        currentSlide,
-        upcomingSlide,
-        layoutLabel,
-        layoutDropdown,
-        pendingCalls = {},
-        lastRevealApiCallId = 0,
-        connected = false,
-        scroller
-
-		document.addEventListener("DOMContentLoaded", async () => {
+      notesValue,
+      currentState,
+      currentSlide,
+      upcomingSlide,
+      layoutLabel,
+      layoutDropdown,
+      pendingCalls = {},
+      lastRevealApiCallId = 0,
+      connected = false,
+      scroller
+      
+      document.addEventListener("DOMContentLoaded", async () => {
         const slideDeck = `../../${wssDetails.FileName}`;
+        //clearTimeout( connectionTimeout );
         connectionStatus.style.display = "none";
         setupLayout();
         handleConnectMessage(slideDeck);
         window.document.getElementById("speaker-controls").focus();
-
-		
+        svSettings = ", Font-size: " + svFontSize + ", Speed: " + speed;
 	});
 	/*
 	*speaker view settings
 	*/
    
 	
+//#region teleprompter layout  
 		   window.document.getElementById("speaker-controls").focus();
 		   window.document.getElementById("speaker-controls").scrollTo(0, 0);
 		   
@@ -441,6 +442,35 @@ body[data-speaker-layout="teleprompter"] #current-slide,
 
 			 label = window.document.querySelector(".overlay-element.label");
 			  
+       function scrollPause() {
+        play = !play;
+        console.log("pause funciton", play)
+        clearInterval(scroller)
+			  //label.innerHTML = Number(currentScroll) +"; "+ Number(notes.scrollHeight) + "; "+ notes.clientHeight + "; Play: " + play+ ", Size: " + svFontSize + ", Speed: " + speed;
+        console.log(play, notesValue.innerHTML.length >0)
+        if(play && notesValue.innerHTML.length >0){
+          scroller = setInterval(scroll, speed);
+        }
+			  label.innerHTML = play ? "Play" + svSettings : "Pause" + svSettings;
+		 }
+
+       function updateNoteFontSize(change){
+          svFontSize = Number(svFontSize) + Number(change)
+          window.document.querySelector(".speaker-controls-notes").style.fontSize = svFontSize;
+          console.log (svFontSize) }
+
+        function updateScrollSpeed(change){
+          clearInterval(scroller)
+          speed = Number(speed) + Number(change)
+          console.log("sopeed updatecalled", speed, change)
+          console.log(notesValue.innerHTML.length)
+          
+          if (play && notesValue.innerHTML.length >0) {
+          scroller = setInterval(scroll, speed);
+          }
+        }
+
+
 			 function teleprompterScroll() {
 				  
 				  play = true;
@@ -450,56 +480,44 @@ body[data-speaker-layout="teleprompter"] #current-slide,
 				  notes = window.document.getElementById("speaker-controls");
 				  
 				  window.document.querySelector(".speaker-controls-notes"
-			  ).style.fontSize = svFontSize;
-			  
-			  svSettings = ", Font-size: " + svFontSize + ", Speed: " + speed;
-			  
-			  scrollActive = scrollActive + 1;
-			  console.log("what does scroll equal?")
-			  //if (scrollActive == 1) {
-				  scroller = setInterval(scroll, speed);
-				  console.log(scroller)
-			  //}
-			  function scroll() {
-				  
-				  console.log("note ", notes)
-				  console.log("note area height", notes.scrollHeight)
-				  if (play == true) {
-					  if (Number(currentScroll) == Number(notes.scrollHeight) - 200) {
-						  play = false;
-						  currentScroll = 0;
-						  notes.scrollTo(0, 0);
-						  scrollActive = 0;
-						  label.innerHTML = play
-						  ? "Play" + svSettings
-						  : "Pause" + svSettings;
-					  } else {
-						  currentScroll = currentScroll + 1;
-						  notes.scrollTo(0, currentScroll);
-						  label.innerHTML = play
-						  ? "Play" + svSettings
-						  : "Pause" + svSettings;
-					  }
-				  }
-			  }
-		  }
+          ).style.fontSize = svFontSize;
+          
+          
+          scrollActive = scrollActive + 1;
+          console.log("what does scroll equal?")
+          //if (scrollActive == 1) {
+            scroller = setInterval(scroll, speed);
+            console.log(scroller)
+            //}
+          }
+          function scroll() {
+            
+            svSettings = ", Font-size: " + svFontSize + ", Speed: " + speed;
+        //console.log("note ", notes)
+        //console.log("note area height", notes.scrollHeight)
+        if (play == true) {
+          if (Number(currentScroll) >= Number(notes.scrollHeight) - 200) {
+            play = false;
+            currentScroll = 0;
+            notes.scrollTo(0, 0);
+            scrollActive = 0;
+            label.innerHTML = play
+            ? "Play" + svSettings
+            : "Pause" + svSettings;
+          } else {
+            currentScroll = currentScroll + 1;
+            notes.scrollTo(0, currentScroll);
+            label.innerHTML = play
+            ? "Play" + svSettings
+            : "Pause" + svSettings;
+          }
+        }
+      }
 		  
 		  label.addEventListener("click", scrollPause);
 	
-		  window.document.addEventListener("keydown", scrollPause);
 	
-		  svSettings = ", Font-size: " + svFontSize + ", Speed: " + speed;
-	
-		  function scrollPause(e) {
-			label.innerHTML = e.button;
-			if (e.keyCode == 192 || e.button == 0) {
-			  event.preventDefault();
-			  play = !play;
-			  //label.innerHTML = Number(currentScroll) +"; "+ Number(notes.scrollHeight) + "; "+ notes.clientHeight + "; Play: " + play+ ", Size: " + svFontSize + ", Speed: " + speed;
-			  label.innerHTML = play ? "Play" + svSettings : "Pause" + svSettings;
-			  return false;
-			}
-		  }
+		  
 		  
 		  /* 		function keyDownTextField(e) {
 			  var keyCode = e.keyCode;
@@ -510,8 +528,9 @@ body[data-speaker-layout="teleprompter"] #current-slide,
 			  }
 			}
 			window.document.addEventListener("keydown", keyDownTextField, false); */
-
-			///////////coonection funcctions
+//#endregion
+			
+///////////connection functions
 			var connectionStatus = document.querySelector("#connection-status");
 
       var SPEAKER_LAYOUTS = {
@@ -654,23 +673,32 @@ body[data-speaker-layout="teleprompter"] #current-slide,
        */
       function setupKeyboard() {
         document.addEventListener("keydown", function (event) {
+          event.preventDefault();
           if (
             event.keyCode === 116 ||
             (event.metaKey && event.keyCode === 82)
           ) {
-            event.preventDefault();
             return false;
+          }
+          switch(event.keyCode){
+            case (49): setLayout("default"); break;
+            case (50): setLayout("wide"); break;
+            case (51): setLayout("tall"); break;
+            case (52): setLayout("notes-only"); break;
+            case (53): setLayout("teleprompter"); break;
+            case (187): updateNoteFontSize(1); break;
+            case (189): updateNoteFontSize(-1); break;
+            case (56): updateScrollSpeed(1); break;
+            case (57): scrollPause(event); break;
+            case (48): updateScrollSpeed(-1); break;
           }
           currentSlide.contentWindow.postMessage(
             JSON.stringify({ method: "triggerKey", args: [event.keyCode] }),
             "*"
           );
-          if (event.keyCode === 117) {
-            setLayout(0);
-          }
         });
       }
-
+      
       /**
        * Creates the preview iframes.
        */
@@ -938,8 +966,9 @@ body[data-speaker-layout="teleprompter"] #current-slide,
        * in local storage.
        */
       function setLayout(value) {
+        console.log(SPEAKER_LAYOUTS)
         var title = SPEAKER_LAYOUTS[value];
-
+console.log("set layout called", value, title)
         layoutLabel.innerHTML = "Layout" + (title ? ": " + title : "");
         layoutDropdown.value = value;
 

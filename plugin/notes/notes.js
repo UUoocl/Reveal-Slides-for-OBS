@@ -40,6 +40,7 @@ const RevealNotes = {
         } else {
           sendMethod("prev",location);
         }
+      
       }
       );
       
@@ -284,7 +285,10 @@ const RevealNotes = {
       }}); 
 
       // Post the initial state
-      post();
+      //post();
+      //Reveal.next()
+      Reveal.prev()
+
       // Post the initial state
     });
   },
