@@ -113,6 +113,8 @@ When a slide with notes is loaded, the text will begin scrolling.
 Adjust the text size and scroll speed. 
 |Action      |Key      |
 |:-----|:-----|
+|next slide|n|
+|previous slide|p|
 |⏪Slowdown scrolling      |F8|
 |⏸️Pause scrolling      |F9     |
 |⏩Speed up scrolling      |F10      |
