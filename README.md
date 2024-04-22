@@ -1,5 +1,5 @@
 # Reveal-Slides-for-OBS
-reveal.js Plugin to use the Speaker Viewer in OBS.  
+A reveal.js Plugin to use the Speaker Viewer in OBS.  
 
 reveal.js is the HTML presentation framework for creating stunning presentations on the web. 
 OBS Studio is a free and open source software for video recording and live streaming.  OBS can play reveal.js slides in its embedded browser.  One limitation is that the OBS Browser doesn't allow pop up windows.  This means the reveal.js Speaker View can't open 😢
