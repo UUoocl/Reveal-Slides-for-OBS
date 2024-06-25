@@ -15,6 +15,7 @@ The Reveal Slides for OBS plugin modifies the Speaker View so that a pop up wind
 
 ## Setup Reveal Slides for OBS
 #### reveal.js deck folder structure
+[Download a copy](https://github.com/hakimel/reveal.js/archive/master.zip) of Reveal.js make the following edits
 - {Your slide deck}.html
 - websocketDetails.js
 - /plugin
@@ -128,7 +129,7 @@ Adjust the text size and scroll speed.
 |Upcoming Slide only|6|
 
 ## How to make reveal.js slides
-Try the online visual slide editor at [slides.com][https://slides.com/]
+Try the online visual slide editor at [slides.com](https://slides.com/)
 
 Another option is the [Advanced Slides](https://github.com/MSzturc/obsidian-advanced-slides) Plug-in for Obsidian.  This is a great markdown slide editor with unique features. 
 
